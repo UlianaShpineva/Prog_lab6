@@ -1,11 +1,11 @@
+exceptions\IllegalArgument.class
+exceptions\ScriptRecursionException.class
+models\FormOfEducation.class
+models\StudyGroup.class
 models\Person.class
 exceptions\InvalidForm.class
 models\Country.class
 models\Location.class
-exceptions\IllegalArgument.class
-exceptions\ScriptRecursionException.class
 exceptions\NoSuchCommand.class
 models\Validatable.class
 models\Coordinates.class
-models\FormOfEducation.class
-models\StudyGroup.class

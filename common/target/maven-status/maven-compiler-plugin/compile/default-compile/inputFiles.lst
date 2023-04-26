@@ -1,11 +1,15 @@
-C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Country.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\network\Response.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\exceptions\ScriptRecursionException.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\exceptions\NoSuchCommand.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\exceptions\InvalidForm.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\exceptions\IllegalArgument.java
-C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\StudyGroup.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Validatable.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Coordinates.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Person.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\network\ResponseStatus.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\FormOfEducation.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\network\Request.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Country.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\StudyGroup.java
+C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\exceptions\CommandRuntimeError.java
 C:\Users\ulian\Рабочий стол\study\itmo\programming\lab6\common\src\main\java\models\Location.java
