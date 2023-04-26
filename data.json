@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name": "sdvljsnlvd",
+    "coordinates": {
+      "x": 324234,
+      "y": -12313123
+    },
+    "creationDate": "2023-03-15T18:29:18.2992795+03:00[Europe/Moscow]",
+    "studentsCount": 123112312,
+    "expelledStudents": 1123123223,
+    "transferredStudents": 123123,
+    "formOfEducation": "EVENING_CLASSES",
+    "groupAdmin": {
+      "name": "241525",
+      "passportID": "JGMG",
+      "nationality": "USA",
+      "location": {
+        "x": -123123,
+        "y": 13123,
+        "z": 1.24115325465879E14,
+        "name": "FDG"
+      }
+    }
+  },
+  {
+    "id": 4,
+    "name": "oooooooooooooo",
+    "coordinates": {
+      "x": 5,
+      "y": 5
+    },
+    "creationDate": "2023-04-26T14:04:58.8870186+03:00[Europe/Moscow]",
+    "studentsCount": 55,
+    "expelledStudents": 5,
+    "transferredStudents": 5,
+    "formOfEducation": "EVENING_CLASSES",
+    "groupAdmin": {
+      "name": "oooooooo",
+      "passportID": "5555",
+      "nationality": "USA",
+      "location": {
+        "x": 5,
+        "y": 55,
+        "z": 5.0,
+        "name": "oooooooo"
+      }
+    }
+  }
+]

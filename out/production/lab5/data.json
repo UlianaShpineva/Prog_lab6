@@ -1,0 +1,74 @@
+[
+  {
+    "id": 3,
+    "name": "ff",
+    "coordinates": {
+      "x": 1,
+      "y": 2
+    },
+    "creationDate": "2023-03-02T00:12:28.5988398+03:00[Europe/Moscow]",
+    "studentsCount": 3,
+    "expelledStudents": 4,
+    "transferredStudents": 5,
+    "formOfEducation": "EVENING_CLASSES",
+    "groupAdmin": {
+      "name": "WWQ",
+      "passportID": "123",
+      "nationality": "USA",
+      "location": {
+        "x": 2,
+        "y": 3,
+        "z": 4.0,
+        "name": "T"
+      }
+    }
+  },
+  {
+    "id": 0,
+    "name": "sdvljsnlvd",
+    "coordinates": {
+      "x": 324234,
+      "y": -12313123
+    },
+    "creationDate": "2023-03-15T18:29:18.2992795+03:00[Europe/Moscow]",
+    "studentsCount": 123112312,
+    "expelledStudents": 1123123223,
+    "transferredStudents": 123123,
+    "formOfEducation": "EVENING_CLASSES",
+    "groupAdmin": {
+      "name": "241525",
+      "passportID": "JGMG",
+      "nationality": "USA",
+      "location": {
+        "x": -123123,
+        "y": 13123,
+        "z": 1.24115325465879E14,
+        "name": "FDG"
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "ghj",
+    "coordinates": {
+      "x": 1,
+      "y": 2
+    },
+    "creationDate": "2023-03-02T00:12:28.5988398+03:00[Europe/Moscow]",
+    "studentsCount": 3,
+    "expelledStudents": 4,
+    "transferredStudents": 5,
+    "formOfEducation": "EVENING_CLASSES",
+    "groupAdmin": {
+      "name": "WWQ",
+      "passportID": "123",
+      "nationality": "USA",
+      "location": {
+        "x": 2,
+        "y": 3,
+        "z": 4.0,
+        "name": "T"
+      }
+    }
+  }
+]
