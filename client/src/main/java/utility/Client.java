@@ -48,7 +48,6 @@ public class Client {
                     reconnectionAttempts++;
                     continue;
                 }
-                //if(Objects.isNull(bStream) || Objects.isNull(iStream)) throw new IOException(); //!!!
                 if (request.isEmpty()) return new Response(ResponseStatus.WRONG_ARGUMENTS, "Запрос пустой!");
                 bStream = new ByteArrayOutputStream();
                 ObjectOutput oo = new ObjectOutputStream(bStream);
@@ -67,14 +66,12 @@ public class Client {
                 byte[] toDeserialize = receiveBuf.array();
 
                 iStream = new ObjectInputStream(new ByteArrayInputStream(toDeserialize));
-                Response response = (Response) iStream.readObject(); //!!!!
-                //System.out.printf("Casted response to Response object");
+                Response response = (Response) iStream.readObject();
 
                 iStream.close();
 
                 this.disconnectFromServer();
                 reconnectionAttempts = 0;
-                //System.out.println(response.toString());
                 return response;
 
             } catch (IOException e) {
