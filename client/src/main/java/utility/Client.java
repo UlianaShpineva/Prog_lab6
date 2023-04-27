@@ -111,7 +111,7 @@ public class Client {
             //console.println(addr.toString());
             this.client = DatagramChannel.open().bind(null).connect(addr);
             //console.println(client.toString());
-            this.client.configureBlocking(false);
+            this.client.configureBlocking(true);
         } catch (IllegalArgumentException e){
             console.printError("Адрес сервера введен некорректно");
         } catch (IOException e) {
