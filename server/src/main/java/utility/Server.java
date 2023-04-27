@@ -72,6 +72,7 @@ abstract class Server {
                 String line = scanner.readLine();
                 if (line.equals("save") || line.equals("s")) {
                     fileManager.writeCollection(collectionManager.getCollection());
+                    serverLogger.info("Коллекция сохранена");
                 }
             }
             byte[] dataFromClient = pair.getData();

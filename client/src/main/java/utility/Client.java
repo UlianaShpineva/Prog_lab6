@@ -71,7 +71,6 @@ public class Client {
                 //System.out.printf("Casted response to Response object");
 
                 iStream.close();
-//                System.out.print(response);
 
                 this.disconnectFromServer();
                 reconnectionAttempts = 0;
@@ -79,7 +78,6 @@ public class Client {
                 return response;
 
             } catch (IOException e) {
-                e.printStackTrace();
                 if (reconnectionAttempts == 0){
                     connectToServer();
                     reconnectionAttempts++;
@@ -116,7 +114,7 @@ public class Client {
             //console.println(addr.toString());
             this.client = DatagramChannel.open().bind(null).connect(addr);
             //console.println(client.toString());
-            this.client.configureBlocking(true);
+            this.client.configureBlocking(false);
         } catch (IllegalArgumentException e){
             console.printError("Адрес сервера введен некорректно");
         } catch (IOException e) {
