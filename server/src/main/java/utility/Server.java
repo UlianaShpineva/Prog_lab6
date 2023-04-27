@@ -60,6 +60,14 @@ abstract class Server {
 
     public void run() throws IOException {
         while (running) {
+            if (scanner.ready()) {
+                String line = scanner.readLine();
+                if (line.equals("save") || line.equals("s")) {
+                    fileManager.writeCollection(collectionManager.getCollection());
+//                    serverLogger.info("Коллекция сохранена");
+                }
+            }
+
             Pair pair;
             try {
                 pair = receiveData();
@@ -68,13 +76,6 @@ abstract class Server {
                 continue;
             }
 
-            if (scanner.ready()) {
-                String line = scanner.readLine();
-                if (line.equals("save") || line.equals("s")) {
-                    fileManager.writeCollection(collectionManager.getCollection());
-                    serverLogger.info("Коллекция сохранена");
-                }
-            }
             byte[] dataFromClient = pair.getData();
             SocketAddress clientAddr = pair.getAddr();
 
