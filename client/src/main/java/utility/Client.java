@@ -98,7 +98,7 @@ public class Client {
                     console.printError("Попытка соединения с сервером неуспешна");
                 }
             } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                console.printError("Неизвестная ошибка");
             }
         }
     }
@@ -130,22 +130,4 @@ public class Client {
             console.printError("Не подключен к серверу");
         }
     }
-
-
-    /*public void sendData(byte[] bytesToSend) throws IOException {
-        if (client.isConnected() && client.isOpen()) {
-            var buf = ByteBuffer.wrap(bytesToSend);
-            client.send(buf, addr);
-        } else this.openConnection();
-    }
-
-    /*public ByteArrayInputStream listenServer() throws IOException {
-        ByteArrayInputStream res = null;
-        if (client.isConnected() && client.isOpen()) {
-            ByteBuffer buf = ByteBuffer.allocate(4096);
-            addr = client.receive(buf);
-            res = new ByteArrayInputStream(buf.array());
-        } else this.openConnection();
-        return res;
-    }*/
 }

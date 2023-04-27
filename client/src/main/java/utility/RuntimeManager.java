@@ -45,11 +45,8 @@ public class RuntimeManager {
                     System.exit(0);
                 }
                 String[] userCommand = (userScanner.nextLine().trim() + " ").split(" ", 2);
-                //this.launch(userCommand.split(" ", 2));
-                //userCommand.split(" ", 2);
 
                 Response response = client.sendAndAskResponse(new Request(userCommand[0].trim(), userCommand[1].trim()));
-//                System.out.printf(response.toString());
                 this.printResponse(response);
                 switch (response.getStatus()){
                     case ASK_OBJECT -> {
@@ -67,7 +64,7 @@ public class RuntimeManager {
                             this.printResponse(newResponse);
                         }
                     }
-                    case EXIT -> System.exit(0);//throw new ExitObliged();
+                    case EXIT -> System.exit(0);
                     case EXECUTE_SCRIPT -> {
                         ScannerManager.setFileMode();
                         this.scriptMode(response.getResponse());
@@ -82,17 +79,14 @@ public class RuntimeManager {
             } catch (IllegalArgument e) {
                 console.printError("Введены неправильные аргументы команды");
             } catch (InvalidForm e) {
-                throw new RuntimeException(e);
+                console.printError("Поля не валидны! Объект не создан");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                console.printError("Неизвестная ошибка");
             }
         }
     }
 
     public void scriptMode(String fileName) {
-        /*if (!new File(fileName).exists()) {
-            fileName = fileName;
-        }*/
         scriptStack.add(new File(fileName));
         try (Scanner scriptScanner = new Scanner(new File(fileName))) {
             if (!scriptScanner.hasNext()) throw new NoSuchElementException();
@@ -133,10 +127,9 @@ public class RuntimeManager {
                             this.printResponse(newResponse);
                         }
                     }
-                    case EXIT -> System.exit(0);//throw new ExitObliged();
+                    case EXIT -> System.exit(0);
                     case EXECUTE_SCRIPT -> {
                         this.scriptMode(response.getResponse());
-                        //ExecuteFileManager.popRecursion();
                     }
                     default -> {}
                 }
@@ -156,22 +149,11 @@ public class RuntimeManager {
         } catch (IllegalArgument e) {
             console.printError("Введены неправильные аргументы команды");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            console.printError("Неизвестная ошибка");
         }
 
     }
 
-/*
-    /**
-     * Запускает выполнение команд
-     * @param userCommand Массив с именем команды и аргументом
-     * @throws IllegalArgument Неверные аргументы команды
-     * @throws NoSuchCommand Нет такой команды
-     *./
-    public void launch(String[] userCommand) throws IllegalArgument, NoSuchCommand {
-        if (userCommand[0].equals("")) return;
-        commandManager.execute(userCommand[0], userCommand[1]);
-    }*/
 
     public void printResponse(Response response) {
         switch (response.getStatus()){

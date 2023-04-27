@@ -49,14 +49,14 @@ public class App {
         try {
             server = new DatagramServer(InetAddress.getLocalHost(), port, connection_timeout, requestHandler, fileManager, collectionManager);
         } catch (UnknownHostException e) {
-            logger.fatal("Неизвестный хост", e);
+            logger.fatal("Неизвестный хост");
         } catch (SocketException e) {
-            logger.fatal("Случилась ошибка сокета", e);
+            logger.fatal("Случилась ошибка сокета");
         }
         try {
             server.run();
         } catch (IOException e) {
-            logger.fatal("Неизвестная ошибка ", e);
+            logger.fatal("Неизвестная ошибка ");
         }
     }
 }
