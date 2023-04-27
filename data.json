@@ -1,29 +1,5 @@
 [
   {
-    "id": 5,
-    "name": "name",
-    "coordinates": {
-      "x": 5,
-      "y": 5
-    },
-    "creationDate": "2023-04-27T09:06:00.4997889+03:00[Europe/Moscow]",
-    "studentsCount": 5,
-    "expelledStudents": 5,
-    "transferredStudents": 6,
-    "formOfEducation": "FULL_TIME_EDUCATION",
-    "groupAdmin": {
-      "name": "Admin",
-      "passportID": "123123123",
-      "nationality": "USA",
-      "location": {
-        "x": 1,
-        "y": 1,
-        "z": 1.0,
-        "name": "1"
-      }
-    }
-  },
-  {
     "id": 0,
     "name": "sdvljsnlvd",
     "coordinates": {
