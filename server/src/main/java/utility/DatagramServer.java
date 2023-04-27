@@ -4,6 +4,8 @@ import exceptions.ConnectionErrorException;
 import exceptions.OpeningServerException;
 import managers.CollectionManager;
 import managers.FileManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,6 +19,7 @@ public class DatagramServer extends Server {
     private int soTimeout;
     private FileManager fileManager;
     private CollectionManager collectionManager;
+    static final Logger datagramServerLogger = LogManager.getLogger(DatagramServer.class);
     public DatagramServer(InetAddress address, int port, int soTimeout, RequestHandler requestHandler, FileManager fileManager, CollectionManager collectionManager) throws SocketException {
         super(new InetSocketAddress(address, port), soTimeout, requestHandler, fileManager, collectionManager);
         this.socket = new DatagramSocket(getAddr());
@@ -56,11 +59,12 @@ public class DatagramServer extends Server {
     @Override
     public void connectToClient(SocketAddress addr) throws SocketException {
         socket.connect(addr);
-        socket.setSoTimeout(100);
+//        socket.setSoTimeout(100);
     }
 
     @Override
     public void disconnectFromClient() {
+        datagramServerLogger.info("Соединение разорвано");
         socket.disconnect();
     }
 
