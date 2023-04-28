@@ -72,6 +72,7 @@ abstract class Server {
             try {
                 pair = receiveData();
             } catch (Exception e) {
+                serverLogger.debug(e);
                 disconnectFromClient();
                 continue;
             }
@@ -83,6 +84,7 @@ abstract class Server {
                 connectToClient(clientAddr);
                 serverLogger.info("Соединение установлено");
             } catch (Exception e) {
+                serverLogger.debug(e);
                 serverLogger.info("Ошибка подключения");
             }
 
@@ -94,15 +96,16 @@ abstract class Server {
                 serverLogger.info("Получен реквест с командой " + request.getCommandName(), request);
             } catch (IOException e) {
                 disconnectFromClient();
+                serverLogger.debug(e);
                 continue;
             } catch (ClassNotFoundException e) {
                 serverLogger.info("Произошла ошибка при чтении полученных данных!");
             }
-
             Response response = null;
             try {
                 response = requestHandler.handle(request);
             } catch (Exception e) {
+                serverLogger.debug(e);
             }
             ByteArrayOutputStream bStream = new ByteArrayOutputStream();
             ObjectOutput oo = new ObjectOutputStream(bStream);
@@ -115,8 +118,8 @@ abstract class Server {
                 sendData(data, clientAddr);
                 serverLogger.info("Отправлен ответ", response);
             } catch (Exception e) {
+                serverLogger.debug(e);
             }
-
             disconnectFromClient();
 
         }

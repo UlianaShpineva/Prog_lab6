@@ -38,7 +38,6 @@ public class DatagramServer extends Server {
         while (!received) {
             byte[] buffer = new byte[102400000];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-
             socket.receive(packet);
             addr = packet.getSocketAddress();
             received = true;
