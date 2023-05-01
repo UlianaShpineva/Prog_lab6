@@ -11,6 +11,8 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import java.util.Objects;
+import java.util.Scanner;
 
 abstract class Server {
     private int soTimeout;
@@ -24,7 +26,8 @@ abstract class Server {
 
     BufferedInputStream bf = new BufferedInputStream(System.in);
 
-    BufferedReader scanner = new BufferedReader(new InputStreamReader(bf));
+//    BufferedReader scanner = new BufferedReader(new InputStreamReader(bf));
+    Scanner scanner = new Scanner(System.in);
     static final Logger serverLogger = LogManager.getLogger(Server.class);
 
     public Server(InetSocketAddress addr, int soTimeout, RequestHandler requestHandler, FileManager fileManager, CollectionManager collectionManager) { //InetAddress host, int port, int soTimeout, RequestHandler handler, FileManager fileManager) {
@@ -60,11 +63,10 @@ abstract class Server {
 
     public void run() throws IOException {
         while (running) {
-            if (scanner.ready()) {
-                String line = scanner.readLine();
+            if (scanner.hasNext()) {
+                String line = scanner.nextLine();
                 if (line.equals("save") || line.equals("s")) {
                     fileManager.writeCollection(collectionManager.getCollection());
-//                    serverLogger.info("Коллекция сохранена");
                 }
             }
 
@@ -72,7 +74,7 @@ abstract class Server {
             try {
                 pair = receiveData();
             } catch (Exception e) {
-                serverLogger.debug(e);
+                serverLogger.info(e);
                 disconnectFromClient();
                 continue;
             }
@@ -84,7 +86,6 @@ abstract class Server {
                 connectToClient(clientAddr);
                 serverLogger.info("Соединение установлено");
             } catch (Exception e) {
-                serverLogger.debug(e);
                 serverLogger.info("Ошибка подключения");
             }
 
@@ -96,16 +97,15 @@ abstract class Server {
                 serverLogger.info("Получен реквест с командой " + request.getCommandName(), request);
             } catch (IOException e) {
                 disconnectFromClient();
-                serverLogger.debug(e);
                 continue;
             } catch (ClassNotFoundException e) {
                 serverLogger.info("Произошла ошибка при чтении полученных данных!");
             }
+
             Response response = null;
             try {
                 response = requestHandler.handle(request);
             } catch (Exception e) {
-                serverLogger.debug(e);
             }
             ByteArrayOutputStream bStream = new ByteArrayOutputStream();
             ObjectOutput oo = new ObjectOutputStream(bStream);
@@ -118,8 +118,8 @@ abstract class Server {
                 sendData(data, clientAddr);
                 serverLogger.info("Отправлен ответ", response);
             } catch (Exception e) {
-                serverLogger.debug(e);
             }
+
             disconnectFromClient();
 
         }

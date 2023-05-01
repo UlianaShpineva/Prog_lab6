@@ -30,7 +30,6 @@ public class DatagramServer extends Server {
 
     @Override
     public Pair receiveData() throws IOException {
-
         boolean received = false;
         byte[] res = new byte[0];
         SocketAddress addr = null;
@@ -38,6 +37,7 @@ public class DatagramServer extends Server {
         while (!received) {
             byte[] buffer = new byte[102400000];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+
             socket.receive(packet);
             addr = packet.getSocketAddress();
             received = true;
@@ -58,7 +58,7 @@ public class DatagramServer extends Server {
     @Override
     public void connectToClient(SocketAddress addr) throws SocketException {
         socket.connect(addr);
-//        socket.setSoTimeout(100);
+        //socket.setSoTimeout(100);
     }
 
     @Override

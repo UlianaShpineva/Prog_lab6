@@ -1,4 +1,7 @@
+exceptions\CommandRuntimeError.class
+network\ResponseStatus.class
 exceptions\IllegalArgument.class
+network\Request.class
 exceptions\ScriptRecursionException.class
 models\FormOfEducation.class
 models\StudyGroup.class
@@ -9,3 +12,4 @@ models\Location.class
 exceptions\NoSuchCommand.class
 models\Validatable.class
 models\Coordinates.class
+network\Response.class

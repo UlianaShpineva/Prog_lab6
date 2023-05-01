@@ -81,7 +81,7 @@ public class RuntimeManager {
             } catch (InvalidForm e) {
                 console.printError("Поля не валидны! Объект не создан");
             } catch (IOException e) {
-                console.printError("Неизвестная ошибка");
+                console.printError("Неизвестная ошибка " + e);
             }
         }
     }

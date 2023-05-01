@@ -30,75 +30,76 @@ public class Client {
     //private ObjectOutputStream serverWriter;
     //private ObjectInputStream serverReader;
 
-    public Client(InetAddress host, int port, int reconnectionTimeout, int maxReconnectionAttempts, Console console) {
+    public Client(InetAddress host, int port, Console console) throws IOException {
         this.host = host;
         this.port = port;
-        this.reconnectionTimeout = reconnectionTimeout;
-        this.maxReconnectionAttempts = maxReconnectionAttempts;
         this.console = console;
-        //this.client = DatagramChannel.open().bind(null).connect(addr);
-        // this.client.configureBlocking(false);
+
+        this.addr = new InetSocketAddress(host, port);
+        this.client = DatagramChannel.open().bind(null).connect(addr);
+        this.client.configureBlocking(false);
     }
 
     public Response sendAndAskResponse(Request request) throws IOException {
-        while (true) {
-            try {
-                if (reconnectionAttempts == 0){
-                    connectToServer();
-                    reconnectionAttempts++;
-                    continue;
-                }
-                if (request.isEmpty()) return new Response(ResponseStatus.WRONG_ARGUMENTS, "Запрос пустой!");
-                bStream = new ByteArrayOutputStream();
-                ObjectOutput oo = new ObjectOutputStream(bStream);
-                oo.writeObject(request);
-                oo.flush();
-                oo.close();
-                byte[] serializedMessage = bStream.toByteArray();
-                ByteBuffer buf = ByteBuffer.wrap(serializedMessage);
-                //console.println(addr.toString());
-                client.send(buf, this.addr);
+        if (request.isEmpty()) return new Response(ResponseStatus.WRONG_ARGUMENTS, "Запрос пустой!");
 
-                buf.clear();
-                var receiveBuf = ByteBuffer.allocate(65000);
-                addr = client.receive(receiveBuf);
-                //System.out.printf("Received %d bytes", receiveBuf.array().length);
-                byte[] toDeserialize = receiveBuf.array();
+        bStream = new ByteArrayOutputStream();
+        ObjectOutput oo = new ObjectOutputStream(bStream);
+        oo.writeObject(request);
+        oo.flush();
+        oo.close();
+        byte[] serializedMessage = bStream.toByteArray();
+        ByteBuffer buf = ByteBuffer.wrap(serializedMessage);
+        client.send(buf, this.addr);
+        buf.clear();
 
-                iStream = new ObjectInputStream(new ByteArrayInputStream(toDeserialize));
-                Response response = (Response) iStream.readObject();
-
-                iStream.close();
-
-                this.disconnectFromServer();
-                reconnectionAttempts = 0;
-                return response;
-
-            } catch (IOException e) {
-                if (reconnectionAttempts == 0){
-                    connectToServer();
-                    reconnectionAttempts++;
-                    continue;
-                } else {
-                    console.printError("Соединение с сервером разорвано");
-                }
-                try {
-                    reconnectionAttempts++;
-                    if (reconnectionAttempts >= maxReconnectionAttempts) {
-                        console.printError("Превышено максимальное количество попыток соединения с сервером");
-                        return new Response(ResponseStatus.EXIT);
-                    }
-                    console.println("Повторная попытка через " + reconnectionTimeout / 1000 + " секунд");
-                    Thread.sleep(reconnectionTimeout);
-                    connectToServer();
-                } catch (Exception exception) {
-                    console.printError("Попытка соединения с сервером неуспешна");
-                }
-            } catch (ClassNotFoundException e) {
-                console.printError("Неизвестная ошибка");
-            }
+        ByteBuffer receiveBuf = ByteBuffer.allocate(65000);
+        SocketAddress address = null;
+        while (address == null) {
+            address = client.receive(receiveBuf);
         }
+
+        receiveBuf.flip();
+        byte[] bytes = new byte[receiveBuf.remaining()];
+        receiveBuf.get(bytes);
+
+        byte[] toDeserialize = receiveBuf.array();
+        this.iStream = new ObjectInputStream(new ByteArrayInputStream(toDeserialize));
+        Response response = null;
+        try {
+            response = (Response) iStream.readObject();
+        } catch (ClassNotFoundException ex) {
+            console.printError(String.valueOf(ex));
+        }
+        iStream.close();
+        return response;
     }
+
+//            } catch (IOException e) {
+//                if (reconnectionAttempts == 0){
+//                    connectToServer();
+//                    reconnectionAttempts++;
+//                    continue;
+//                } else {
+//                    console.printError("Соединение с сервером разорвано");
+//                }
+//                try {
+//                    reconnectionAttempts++;
+//                    if (reconnectionAttempts >= maxReconnectionAttempts) {
+//                        console.printError("Превышено максимальное количество попыток соединения с сервером");
+//                        return new Response(ResponseStatus.EXIT);
+//                    }
+//                    console.println("Повторная попытка через " + reconnectionTimeout / 1000 + " секунд");
+//                    Thread.sleep(reconnectionTimeout);
+//                    connectToServer();
+//                } catch (Exception exception) {
+//                    console.printError("Попытка соединения с сервером неуспешна");
+//                }
+//            } catch (ClassNotFoundException e) {
+//                console.printError("Неизвестная ошибка");
+//            }
+        //}
+
 
     public void connectToServer()  {
         //if (!client.isConnected()) {
@@ -111,7 +112,7 @@ public class Client {
             //console.println(addr.toString());
             this.client = DatagramChannel.open().bind(null).connect(addr);
             //console.println(client.toString());
-            //this.client.configureBlocking(true);
+            this.client.configureBlocking(false);
         } catch (IllegalArgumentException e){
             console.printError("Адрес сервера введен некорректно");
         } catch (IOException e) {

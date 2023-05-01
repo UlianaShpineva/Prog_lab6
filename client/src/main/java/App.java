@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         console = new Console();
         try {
-            Client client = new Client(InetAddress.getLocalHost(), port, 5000, 5, console);
+            Client client = new Client(InetAddress.getLocalHost(), port, console);
             new RuntimeManager(console, client, new Scanner(System.in)).interactiveMode();
         } catch (IOException e) {
             console.println("Невозможно подключиться к серверу!");
