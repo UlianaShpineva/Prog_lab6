@@ -26,8 +26,8 @@ abstract class Server {
 
     BufferedInputStream bf = new BufferedInputStream(System.in);
 
-//    BufferedReader scanner = new BufferedReader(new InputStreamReader(bf));
-    Scanner scanner = new Scanner(System.in);
+    BufferedReader scanner = new BufferedReader(new InputStreamReader(bf));
+//    Scanner scanner = new Scanner(System.in);
     static final Logger serverLogger = LogManager.getLogger(Server.class);
 
     public Server(InetSocketAddress addr, int soTimeout, RequestHandler requestHandler, FileManager fileManager, CollectionManager collectionManager) { //InetAddress host, int port, int soTimeout, RequestHandler handler, FileManager fileManager) {
@@ -63,8 +63,8 @@ abstract class Server {
 
     public void run() throws IOException {
         while (running) {
-            if (scanner.hasNext()) {
-                String line = scanner.nextLine();
+            if (scanner.ready()) {
+                String line = scanner.readLine();
                 if (line.equals("save") || line.equals("s")) {
                     fileManager.writeCollection(collectionManager.getCollection());
                 }
