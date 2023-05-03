@@ -38,9 +38,6 @@ abstract class Server {
         this.collectionManager = collectionManager;
     }
 
-
-
-
     public InetSocketAddress getAddr() {
         return addr;
     }
@@ -52,9 +49,7 @@ abstract class Server {
      */
     public abstract void sendData(byte[] data, SocketAddress addr) throws IOException;
 
-    public abstract void connectToClient(SocketAddress addr) throws SocketException;
 
-    public abstract void disconnectFromClient();
     public abstract void close();
 
     public void stop() {
@@ -74,8 +69,7 @@ abstract class Server {
             try {
                 pair = receiveData();
             } catch (Exception e) {
-                serverLogger.info(e);
-                disconnectFromClient();
+//                disconnectFromClient();
                 continue;
             }
 
@@ -83,8 +77,8 @@ abstract class Server {
             SocketAddress clientAddr = pair.getAddr();
 
             try {
-                connectToClient(clientAddr);
-                serverLogger.info("Соединение установлено");
+//                connectToClient(clientAddr);
+                serverLogger.info("Соединение установлено. Адрес: " + clientAddr.toString());
             } catch (Exception e) {
                 serverLogger.info("Ошибка подключения");
             }
@@ -96,7 +90,6 @@ abstract class Server {
                 request = (Request) ois.readObject();
                 serverLogger.info("Получен реквест с командой " + request.getCommandName(), request);
             } catch (IOException e) {
-                disconnectFromClient();
                 continue;
             } catch (ClassNotFoundException e) {
                 serverLogger.info("Произошла ошибка при чтении полученных данных!");
@@ -116,12 +109,9 @@ abstract class Server {
 
             try {
                 sendData(data, clientAddr);
-                serverLogger.info("Отправлен ответ", response);
+                serverLogger.info("Отправлен ответ. IP: " + clientAddr.toString(), response);
             } catch (Exception e) {
             }
-
-            disconnectFromClient();
-
         }
 
         close();

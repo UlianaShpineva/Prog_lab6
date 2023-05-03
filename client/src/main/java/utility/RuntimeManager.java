@@ -15,6 +15,7 @@ import network.ResponseStatus;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.PortUnreachableException;
 import java.util.*;
 
 /**
@@ -80,8 +81,10 @@ public class RuntimeManager {
                 console.printError("Введены неправильные аргументы команды");
             } catch (InvalidForm e) {
                 console.printError("Поля не валидны! Объект не создан");
-            } catch (IOException e) {
-                console.printError("Неизвестная ошибка " + e);
+            } catch (PortUnreachableException e) {
+                console.printError("Ошибка подключения, сервер недоступен");
+            }catch (IOException e) {
+                console.printError("Неизвестная ошибкаа " + e);
             }
         }
     }
