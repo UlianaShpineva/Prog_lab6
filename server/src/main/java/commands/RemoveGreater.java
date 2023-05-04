@@ -41,7 +41,7 @@ public class RemoveGreater extends Command implements CollectionEditor {
             StudyGroup newElement = request.getObject();
             Collection<StudyGroup> toRemove = collectionManager.getCollection().stream()
                     .filter(Objects::nonNull)
-                    .filter(studyGroup -> studyGroup.compareTo(newElement) >= 1)
+                    .filter(studyGroup -> studyGroup.compareEl(newElement) >= 1)
                     .collect(Collectors.toList());
             for (StudyGroup element:toRemove) {
                 collectionManager.removeElement(element);

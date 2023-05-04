@@ -52,6 +52,9 @@ public class StudyGroup implements Validatable, Comparable<StudyGroup>, Serializ
     public static int incNextId(){
         return nextId++;
     }
+    public int getNextId() {
+        return nextId;
+    }
 
     public int getId() {
         return id;
@@ -132,6 +135,13 @@ public class StudyGroup implements Validatable, Comparable<StudyGroup>, Serializ
      */
     @Override
     public int compareTo(StudyGroup o) {
+        if (Objects.isNull(o)) return 1;
+        return Float.compare(this.getId(), o.getId());
+//        if (Objects.isNull(o)) return 1;
+//        return Float.compare(this.getName().length(), o.getName().length());
+    }
+
+    public int compareEl(StudyGroup o) {
         if (Objects.isNull(o)) return 1;
         return Float.compare(this.getName().length(), o.getName().length());
     }

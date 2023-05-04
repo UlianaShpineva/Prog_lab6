@@ -9,13 +9,20 @@ import models.StudyGroup;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.Objects;
 import java.util.TreeSet;
 
 /**
  * Класс для работы с коллекцией
  */
 public class CollectionManager {
-    private TreeSet<StudyGroup> collection = new TreeSet<StudyGroup>();
+    private TreeSet<StudyGroup> collection = new TreeSet<StudyGroup>( new Comparator<StudyGroup>() {
+        @Override
+        public int compare(StudyGroup s1, StudyGroup s2) {
+            return s1.compareTo(s2);
+        }
+    });
     private final FileManager fileManager;
     /**
      * Дата создания коллекции

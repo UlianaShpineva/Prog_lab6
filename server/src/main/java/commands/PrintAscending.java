@@ -30,7 +30,7 @@ public class PrintAscending extends Command {
     @Override
     public Response execute(Request request) {
         Collection<StudyGroup> collection = collectionManager.getCollection().stream()
-                .sorted(StudyGroup::compareTo)
+                .sorted(StudyGroup::compareEl)
                 //.forEach(p -> p.toString())
                 .collect(Collectors.toList());
         return new Response(ResponseStatus.OK, "Коллекция в порядке возрастания: ", collection);

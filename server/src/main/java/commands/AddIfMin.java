@@ -33,9 +33,9 @@ public class AddIfMin extends Command implements CollectionEditor {
             return new Response(ResponseStatus.ASK_OBJECT, "Для команды " + this.getName() + " требуется объект");
         }
         StudyGroup newElement = request.getObject();
-        if (newElement.compareTo(collectionManager.getCollection().stream()
+        if (newElement.compareEl(collectionManager.getCollection().stream()
             .filter(Objects::nonNull)
-            .min(StudyGroup::compareTo)
+            .min(StudyGroup::compareEl)
             .orElse(null)) >= 1)
         {
             collectionManager.addElement(newElement);
