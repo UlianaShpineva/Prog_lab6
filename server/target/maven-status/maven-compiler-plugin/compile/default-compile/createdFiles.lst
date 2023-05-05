@@ -4,6 +4,7 @@ commands\Update$1NoSuchId.class
 managers\CommandManager.class
 App.class
 commands\Help.class
+managers\CollectionManager$1.class
 exceptions\ConnectionErrorException.class
 exceptions\OpeningServerException.class
 utility\RequestHandler.class
